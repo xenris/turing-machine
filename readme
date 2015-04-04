@@ -1,0 +1,15 @@
+Turing machine.
+
+Use:
+    After running "build.sh" on a *nix machine the runnable binary will be
+    located in the "bin" folder. (build.sh uses the clang compiler.)
+    The binary takes the turing machine source file path as its only argument.
+    e.g. "./bin/turing example.tu" to run.
+    Strings to be processed are entered through stdin.
+
+Todo:
+    Print help message.
+    Use the "alphabet" value in the source code to validate the input data
+        and source code.
+    Add a command to print each step. (Currently implemented as a compile time
+        value "printSubSteps".)
