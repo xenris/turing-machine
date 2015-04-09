@@ -114,7 +114,7 @@ void machineParseFile(Machine* machine, FILE* file) {
 
 void machineSetAlphabet(Machine* machine, char* alphabet) {
     if(machine->alphabet != NULL) {
-        printf("Can't set alphabet to %s. Already set to %s.", alphabet, machine->alphabet);
+        printf("Can't set alphabet to %s. Already set to %s.\n", alphabet, machine->alphabet);
         return;
     }
 
@@ -130,7 +130,7 @@ void machineSetAlphabet(Machine* machine, char* alphabet) {
 
 void machineSetBlank(Machine* machine, char blank) {
     if(machine->blank != -1) {
-        printf("Can't set blank to %c. Already set to %c.", blank, machine->blank);
+        printf("Can't set blank to %c. Already set to %c\n.", blank, machine->blank);
         return;
     }
 
@@ -139,7 +139,7 @@ void machineSetBlank(Machine* machine, char blank) {
 
 void machineSetInitial(Machine* machine, char* initial) {
     if(machine->initial != NULL) {
-        printf("Can't set initial to %s. Already set to %s.", initial, machine->initial);
+        printf("Can't set initial to %s. Already set to %s.\n", initial, machine->initial);
         return;
     }
 
