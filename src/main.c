@@ -26,7 +26,6 @@ int main(int argc, char** args) {
         return -1;
     }
 
-
     const int lineLength = 512;
     char line[lineLength];
     fgets(line, lineLength, stdin);
