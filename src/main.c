@@ -89,5 +89,18 @@ int main(int argc, char** args) {
 }
 
 void printHelp() {
-    puts("help");
+    puts("Help:");
+    puts("");
+    puts("    turing [options]");
+    puts("");
+    puts("    -s [path]");
+    puts("        Specifies the source file to use.");
+    puts("");
+    puts("    -d [millis]");
+    puts("        If set the tape will be printed for each step of the machine with \"millis\" delay between each.");
+    puts("");
+    puts("    -t [tape]");
+    puts("        Sets the initial value of the tape. If not set the inital tape value will be read in through stdin.");
+    puts("");
+    puts("    e.g. \"./bin/turing -s example.tu -d 500 -t 001010\"");
 }
