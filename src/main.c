@@ -50,9 +50,10 @@ int main(int argc, char** args) {
         }
     }
 
-    if(!printSubSteps) {
-        tapePrint(tape, false);
+    if(printSubSteps) {
+        printf("%s\n", machine->state);
     }
+    tapePrint(tape, printSubSteps);
 
     tapeDelete(tape);
     machineDelete(machine);
