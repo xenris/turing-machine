@@ -1,14 +1,34 @@
 #include "main.h"
 
 int main(int argc, char** args) {
-    if(argc != 2) {
+    char* filePath = NULL;
+
+    bool printSubSteps = false;
+    int delayMillis = 0;
+    char* tapeData = NULL;
+
+    int opt;
+    while((opt = getopt(argc, args, "s:d:t:")) != -1) {
+        switch(opt) {
+        case 's':
+            filePath = optarg;
+            break;
+        case 'd':
+            delayMillis = atoi(optarg);
+            printSubSteps = true;
+            break;
+        case 't':
+            tapeData = optarg;
+            break;
+        default:
+            return -1;
+        }
+    }
+
+    if(filePath == NULL) {
         printHelp();
         return -1;
     }
-
-    const char* filePath = args[1];
-
-    bool printSubSteps = false;
 
     FILE* file = fopen(filePath, "r");
 
@@ -26,11 +46,18 @@ int main(int argc, char** args) {
         return -1;
     }
 
-    const int lineLength = 512;
-    char line[lineLength];
-    fgets(line, lineLength, stdin);
-    line[strlen(line) - 1] = '\0';
-    Tape* tape = tapeCreate(line, machine->blank);
+    Tape* tape = NULL;
+
+    if(tapeData == NULL) {
+        const int lineLength = 512;
+        char line[lineLength];
+        fgets(line, lineLength, stdin);
+        line[strlen(line) - 1] = '\0';
+        tape = tapeCreate(line, machine->blank);
+    } else {
+        tape = tapeCreate(tapeData, machine->blank);
+    }
+
     machineReset(machine);
 
     bool done = false;
@@ -46,7 +73,7 @@ int main(int argc, char** args) {
 
         if(printSubSteps) {
             printf("\n");
-            usleep(1000000 / 4);
+            usleep(delayMillis * 1000);
         }
     }
 
