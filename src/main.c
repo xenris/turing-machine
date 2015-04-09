@@ -31,17 +31,17 @@ int main(int argc, char** args) {
     char line[lineLength];
     fgets(line, lineLength, stdin);
     line[strlen(line) - 1] = '\0';
-    machineSetTape(machine, tapeCreate(line, machine->blank));
+    Tape* tape = tapeCreate(line, machine->blank);
     machineReset(machine);
 
     bool done = false;
     while(!done) {
         if(printSubSteps) {
             printf("%s\n", machine->state);
-            tapePrint(machine->tape, true);
+            tapePrint(tape, true);
         }
 
-        if(!machineStep(machine)) {
+        if(!machineStep(machine, tape)) {
             done = true;
         }
 
@@ -52,9 +52,10 @@ int main(int argc, char** args) {
     }
 
     if(!printSubSteps) {
-        tapePrint(machine->tape, false);
+        tapePrint(tape, false);
     }
 
+    tapeDelete(tape);
     machineDelete(machine);
 
     return 0;

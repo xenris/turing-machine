@@ -11,7 +11,6 @@ typedef struct {
     char blank;
     char* initial;
     char* end;
-    Tape* tape;
     Program* program;
     char* state;
 } Machine;
@@ -22,8 +21,7 @@ void machineParseFile(Machine* machine, FILE* file);
 void machineSetAlphabet(Machine* machine, char* alphabet);
 void machineSetBlank(Machine* machine, char blank);
 void machineSetInitial(Machine* machine, char* initial);
-void machineSetTape(Machine* machine, Tape* tape);
-bool machineStep(Machine* machine);
+bool machineStep(Machine* machine, Tape* tape);
 void machineReset(Machine* machine);
 void machinePrint(Machine* machine);
 

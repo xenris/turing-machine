@@ -16,7 +16,6 @@ Machine* machineCreate(FILE* file) {
     machine->blank = -1;
     machine->initial = NULL;
     machine->end = NULL;
-    machine->tape = NULL;
     machine->program = NULL;
     machine->state = NULL;
 
@@ -73,8 +72,6 @@ void machineDelete(Machine* machine) {
     free(machine->alphabet);
 
     free(machine->initial);
-
-    tapeDelete(machine->tape);
 
     programDelete(machine->program);
 
@@ -153,26 +150,19 @@ void machineSetInitial(Machine* machine, char* initial) {
     strcpy(machine->initial, initial);
 }
 
-void machineSetTape(Machine* machine, Tape* tape) {
-    free(machine->tape);
-    machine->tape = tape;
-}
-
-bool machineStep(Machine* machine) {
-    // TODO Remove tape from Machine and pass in here as argument.
-
+bool machineStep(Machine* machine, Tape* tape) {
     if(machine->state == machine->end) {
         return false;
     }
 
-    char input = tapeRead(machine->tape);
+    char input = tapeRead(tape);
 
     Action* action = programFindAction(machine->program, machine->state, input);
 
     if(action != NULL) {
 /*        printf("%s %c %c %c %s\n", machine->state, action->input, action->output, action->direction, action->next);*/
-        tapeWrite(machine->tape, action->output);
-        tapeMove(machine->tape, action->direction);
+        tapeWrite(tape, action->output);
+        tapeMove(tape, action->direction);
 
         machine->state = action->next;
 
@@ -192,8 +182,6 @@ void machinePrint(Machine* machine) {
     printf("blank: %c\n", machine->blank);
     printf("initial: %s\n", machine->initial);
     printf("end: %s\n", machine->end);
-    printf("tape: ");
-    tapePrint(machine->tape, false);
     programPrint(machine->program);
     printf("state: %s\n", machine->state);
 }
