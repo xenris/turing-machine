@@ -192,7 +192,8 @@ void machinePrint(Machine* machine) {
     printf("blank: %c\n", machine->blank);
     printf("initial: %s\n", machine->initial);
     printf("end: %s\n", machine->end);
-    tapePrint(machine->tape);
+    printf("tape: ");
+    tapePrint(machine->tape, false);
     programPrint(machine->program);
     printf("state: %s\n", machine->state);
 }

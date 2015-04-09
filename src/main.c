@@ -34,15 +34,11 @@ int main(int argc, char** args) {
     machineSetTape(machine, tapeCreate(line, machine->blank));
     machineReset(machine);
 
-    putchar('\n');
-    tapePrint(machine->tape);
-    putchar('\n');
-
     bool done = false;
     while(!done) {
         if(printSubSteps) {
             printf("%s\n", machine->state);
-            tapePrint(machine->tape);
+            tapePrint(machine->tape, true);
         }
 
         if(!machineStep(machine)) {
@@ -55,7 +51,9 @@ int main(int argc, char** args) {
         }
     }
 
-    tapePrint(machine->tape);
+    if(!printSubSteps) {
+        tapePrint(machine->tape, false);
+    }
 
     machineDelete(machine);
 

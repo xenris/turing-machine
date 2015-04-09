@@ -67,7 +67,7 @@ bool tapeMove(Tape* tape, char direction) {
     return true;
 }
 
-void tapePrint(Tape* tape) {
+void tapePrint(Tape* tape, bool detailed) {
     if(tape == NULL) {
         return;
     }
@@ -78,11 +78,13 @@ void tapePrint(Tape* tape) {
 
     printf("\n");
 
-    int position = subtapeSize(tape->left);
+    if(detailed) {
+        int position = subtapeSize(tape->left);
 
-    for(int i = 0; i < position; i++) {
-        putchar(' ');
+        for(int i = 0; i < position; i++) {
+            putchar(' ');
+        }
+
+        puts("^");
     }
-
-    puts("^");
 }
