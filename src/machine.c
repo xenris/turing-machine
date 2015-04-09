@@ -1,6 +1,10 @@
 #include "machine.h"
 
 Machine* machineCreate(FILE* file) {
+    if(file == NULL) {
+        return NULL;
+    }
+
     Machine* machine = malloc(sizeof(Machine));
 
     if(machine == NULL) {
@@ -9,22 +13,27 @@ Machine* machineCreate(FILE* file) {
     }
 
     machine->alphabet = NULL;
-
+    machine->blank = -1;
+    machine->initial = NULL;
+    machine->end = NULL;
     machine->tape = NULL;
+    machine->program = NULL;
+    machine->state = NULL;
 
     machine->program = programCreate();
 
     if(machine->program == NULL) {
-        machineDelete(machine);
         return NULL;
     }
 
-    if(file != NULL) {
-        machineParseFile(machine, file);
-    }
+    machineParseFile(machine, file);
 
     if(!programLinkStates(machine->program)) {
-        machineDelete(machine);
+        return NULL;
+    }
+
+    if(machine->initial == NULL) {
+        puts("Error: initial state not specified");
         return NULL;
     }
 
@@ -32,7 +41,6 @@ Machine* machineCreate(FILE* file) {
 
     if(initial == NULL) {
         printf("Can't find initial state \"%s\"\n", machine->initial);
-        machineDelete(machine);
         return NULL;
     }
 
@@ -43,6 +51,16 @@ Machine* machineCreate(FILE* file) {
     machine->end = programFindState(machine->program, "End");
 
     machine->state = initial;
+
+    if(machine->alphabet == NULL) {
+        puts("Error: alphabet not specified");
+        return NULL;
+    }
+
+    if(machine->blank == -1) {
+        puts("Error: blank character not specified");
+        return NULL;
+    }
 
     return machine;
 }
@@ -111,7 +129,7 @@ void machineSetAlphabet(Machine* machine, char* alphabet) {
 }
 
 void machineSetBlank(Machine* machine, char blank) {
-    if(machine->blank != '\0') {
+    if(machine->blank != -1) {
         printf("Can't set blank to %c. Already set to %c.", blank, machine->blank);
         return;
     }
