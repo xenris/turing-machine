@@ -18,7 +18,7 @@ Use:
         Sets the initial value of the tape. If not set the inital tape value
         will be read in through stdin.
 
-    e.g. "./bin/turing -s example.tu -d 500 -t 001010"
+    e.g. "turing -s example.tu -d 500 -t 001010"
 
 Todo:
     Print help message.

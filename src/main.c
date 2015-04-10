@@ -102,5 +102,5 @@ void printHelp() {
     puts("    -t [tape]");
     puts("        Sets the initial value of the tape. If not set the inital tape value will be read in through stdin.");
     puts("");
-    puts("    e.g. \"./bin/turing -s example.tu -d 500 -t 001010\"");
+    puts("    e.g. \"turing -s example.tu -d 500 -t 001010\"");
 }
