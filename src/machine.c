@@ -25,7 +25,10 @@ Machine* machineCreate(FILE* file) {
         return NULL;
     }
 
-    machineParseFile(machine, file);
+    if(!machineParseFile(machine, file)) {
+        machineDelete(machine);
+        return NULL;
+    }
 
     if(!programLinkStates(machine->program)) {
         return NULL;
@@ -78,9 +81,9 @@ void machineDelete(Machine* machine) {
     free(machine);
 }
 
-// TODO Return false on ERROR.
-void machineParseFile(Machine* machine, FILE* file) {
+bool machineParseFile(Machine* machine, FILE* file) {
     bool moreToDo = true;
+    bool success = true;
 
     while(moreToDo) {
         Token* token = tokenGetNext(file);
@@ -99,6 +102,8 @@ void machineParseFile(Machine* machine, FILE* file) {
             programAddTransition(machine->program, token->value, token->input, token->output, token->direction, token->next);
             break;
         case ERROR:
+            success = false;
+            moreToDo = false;
             break;
         case T_EOF:
             moreToDo = false;
@@ -107,6 +112,8 @@ void machineParseFile(Machine* machine, FILE* file) {
 
         tokenDelete(token);
     }
+
+    return success;
 }
 
 void machineSetAlphabet(Machine* machine, char* alphabet) {

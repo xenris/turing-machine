@@ -17,7 +17,7 @@ typedef struct {
 
 Machine* machineCreate(FILE* file);
 void machineDelete(Machine* machine);
-void machineParseFile(Machine* machine, FILE* file);
+bool machineParseFile(Machine* machine, FILE* file);
 void machineSetAlphabet(Machine* machine, char* alphabet);
 void machineSetBlank(Machine* machine, char blank);
 void machineSetInitial(Machine* machine, char* initial);
