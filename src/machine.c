@@ -74,8 +74,6 @@ void machineDelete(Machine* machine) {
 
     free(machine->alphabet);
 
-    free(machine->initial);
-
     programDelete(machine->program);
 
     free(machine);
