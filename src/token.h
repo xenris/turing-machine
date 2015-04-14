@@ -6,6 +6,8 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+#include "util.h"
+
 typedef enum {
     ALPHABET,
     BLANK,

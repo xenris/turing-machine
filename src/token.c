@@ -100,8 +100,7 @@ Token* tokenGetNext(FILE* file) {
                         printf("Error: Expected next state in \"%s\"\n", line);
                         return tokenCreate(ERROR, NULL);
                     } else {
-                        token->next = calloc(strlen(tok) + 1, sizeof(char));
-                        strcpy(token->next, tok);
+                        token->next = stringCopy(tok);
 
                         return token;
                     }
@@ -120,8 +119,7 @@ Token* tokenCreate(TokenType type, char* value) {
     token->type = type;
 
     if(value != NULL) {
-        token->value = calloc(strlen(value) + 1, sizeof(char));
-        strcpy(token->value, value);
+        token->value = stringCopy(value);
     } else {
         token->value = NULL;
     }

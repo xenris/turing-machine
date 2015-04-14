@@ -120,14 +120,7 @@ void machineSetAlphabet(Machine* machine, char* alphabet) {
         return;
     }
 
-    machine->alphabet = calloc(strlen(alphabet) + 1, sizeof(char));
-
-    if(machine->alphabet == NULL) {
-        puts("Failed to allocate memory for Machine.alphabet");
-        return;
-    }
-
-    strcpy(machine->alphabet, alphabet);
+    machine->alphabet = stringCopy(alphabet);
 }
 
 void machineSetBlank(Machine* machine, char blank) {
@@ -145,14 +138,7 @@ void machineSetInitial(Machine* machine, char* initial) {
         return;
     }
 
-    machine->initial = calloc(strlen(initial) + 1, sizeof(char));
-
-    if(machine->initial == NULL) {
-        puts("Failed to allocate memory for Machine.alphabet");
-        return;
-    }
-
-    strcpy(machine->initial, initial);
+    machine->initial = stringCopy(initial);
 }
 
 bool machineStep(Machine* machine, Tape* tape) {
