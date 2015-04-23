@@ -1,6 +1,6 @@
 // Example turing machine program.
 
-// If any bit is a 1 then replace all bits with 1s, otherwise replace all with 0s.
+// If any bit is a 1 then replace all with 1s, otherwise leave all as 0s.
 
 alphabet = 01
 blank = .
