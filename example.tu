@@ -18,8 +18,6 @@ T . . l BT
 
 BF 0 0 l BF
 BF 1 0 l BF
-BF . . r End
 
 BT 0 1 l BT
 BT 1 1 l BT
-BT . . r End
