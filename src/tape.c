@@ -25,12 +25,13 @@ Tape* tapeCreate(char* line, char blank) {
         return NULL;
     }
 
-    subtapePush(tape->left, tape->blank);
     subtapePush(tape->right, tape->blank);
 
     for(int i = strlen(line) - 1; i >= 0; i--) {
         subtapePush(tape->right, line[i]);
     }
+
+    subtapePush(tape->right, tape->blank);
 
     return tape;
 }
