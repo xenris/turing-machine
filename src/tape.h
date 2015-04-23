@@ -19,6 +19,6 @@ void tapeDelete(Tape* tape);
 char tapeRead(Tape* tape);
 void tapeWrite(Tape* tape, char c);
 bool tapeMove(Tape* tape, char direction);
-void tapePrint(Tape* tape, bool detailed);
+void tapePrint(Tape* tape, bool detailed, int markerOffset);
 
 #endif

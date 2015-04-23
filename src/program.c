@@ -244,3 +244,17 @@ void programPrint(Program* program) {
         }
     }
 }
+
+int programGetMaxStateLabelLength(Program* program) {
+    int maxLength = 0;
+    const int stateCount = program->states->size;
+
+    for(int i = 0; i < stateCount; i++) {
+        const int labelLength = strlen(vectorGet(program->states, i));
+        if(labelLength > maxLength) {
+            maxLength = labelLength;
+        }
+    }
+
+    return maxLength;
+}

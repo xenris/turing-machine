@@ -60,11 +60,14 @@ int main(int argc, char** args) {
 
     machineReset(machine);
 
+    const int maxLabelLength = programGetMaxStateLabelLength(machine->program);
+
     bool done = false;
     while(!done) {
         if(printSubSteps) {
-            printf("%s\n", machine->state);
-            tapePrint(tape, true);
+            const int trailingSpaceCount = maxLabelLength + 1 - strlen(machine->state);
+            printf("%s%*c", machine->state, trailingSpaceCount, ' ');
+            tapePrint(tape, true, maxLabelLength + 1);
         }
 
         if(!machineStep(machine, tape)) {
@@ -78,7 +81,7 @@ int main(int argc, char** args) {
     }
 
     if(!printSubSteps) {
-        tapePrint(tape, false);
+        tapePrint(tape, false, 0);
     }
 
     tapeDelete(tape);

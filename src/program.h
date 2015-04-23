@@ -38,5 +38,6 @@ void actionDelete(Action* action);
 bool programLinkStates(Program* program);
 char* programFindState(Program* program, char* state);
 void programPrint(Program* program);
+int programGetMaxStateLabelLength(Program* program);
 
 #endif

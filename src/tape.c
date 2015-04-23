@@ -68,7 +68,7 @@ bool tapeMove(Tape* tape, char direction) {
     return true;
 }
 
-void tapePrint(Tape* tape, bool detailed) {
+void tapePrint(Tape* tape, bool detailed, int markerOffset) {
     if(tape == NULL) {
         return;
     }
@@ -82,7 +82,7 @@ void tapePrint(Tape* tape, bool detailed) {
     if(detailed) {
         int position = subtapeSize(tape->left);
 
-        for(int i = 0; i < position; i++) {
+        for(int i = 0; i < position + markerOffset; i++) {
             putchar(' ');
         }
 
