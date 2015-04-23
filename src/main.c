@@ -77,10 +77,9 @@ int main(int argc, char** args) {
         }
     }
 
-    if(printSubSteps) {
-        printf("%s\n", machine->state);
+    if(!printSubSteps) {
+        tapePrint(tape, false);
     }
-    tapePrint(tape, printSubSteps);
 
     tapeDelete(tape);
     machineDelete(machine);
