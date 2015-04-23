@@ -15,7 +15,6 @@ Machine* machineCreate(FILE* file) {
     machine->alphabet = NULL;
     machine->blank = -1;
     machine->initial = NULL;
-    machine->end = NULL;
     machine->program = NULL;
     machine->state = NULL;
 
@@ -49,8 +48,6 @@ Machine* machineCreate(FILE* file) {
     free(machine->initial);
 
     machine->initial = initial;
-
-    machine->end = programFindState(machine->program, "End");
 
     machine->state = initial;
 
@@ -142,10 +139,6 @@ void machineSetInitial(Machine* machine, char* initial) {
 }
 
 bool machineStep(Machine* machine, Tape* tape) {
-    if(machine->state == machine->end) {
-        return false;
-    }
-
     char input = tapeRead(tape);
 
     Action* action = programFindAction(machine->program, machine->state, input);
@@ -157,9 +150,8 @@ bool machineStep(Machine* machine, Tape* tape) {
 
         machine->state = action->next;
 
-        return (machine->state != machine->end);
+        return true;
     } else {
-        machine->state = machine->end;
         return false;
     }
 }
@@ -172,7 +164,6 @@ void machinePrint(Machine* machine) {
     printf("alphabet: %s\n", machine->alphabet);
     printf("blank: %c\n", machine->blank);
     printf("initial: %s\n", machine->initial);
-    printf("end: %s\n", machine->end);
     programPrint(machine->program);
     printf("state: %s\n", machine->state);
 }

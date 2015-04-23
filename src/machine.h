@@ -10,7 +10,6 @@ typedef struct {
     char* alphabet;
     char blank;
     char* initial;
-    char* end;
     Program* program;
     char* state;
 } Machine;

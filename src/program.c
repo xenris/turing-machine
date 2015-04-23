@@ -15,8 +15,6 @@ Program* programCreate() {
         return NULL;
     }
 
-    vectorAdd(program->states, stringCopy("End"));
-
     program->transitions = vectorCreate();
 
     if(program->transitions == NULL) {
