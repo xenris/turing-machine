@@ -4,7 +4,9 @@
 
 alphabet = 01
 blank = .
-initial = F
+initial = S
+
+S . . r F
 
 F 0 0 r F
 F 1 1 r T
