@@ -2,7 +2,7 @@ Turing machine.
 
 Building:
     After running "build.sh" on a *nix machine the runnable binary will be
-    located in the "bin" folder. (build.sh uses the clang compiler.)
+    located in the "bin" folder.
 
 Use:
     turing [options]
