@@ -12,13 +12,14 @@ Use:
 
     -d [millis]
         If set the tape will be printed for each step of the machine with
-        "millis" delay between each.
+        "millis" delay between each. (Ignored when getting input from stdin.)
 
     -t [tape]
         Sets the initial value of the tape. If not set the inital tape value
         will be read in through stdin.
 
     e.g. "turing -s example.tu -d 500 -t 001010"
+         "cat input.txt | turing -s example.tu > output.txt"
 
 Todo:
     Use the "alphabet" value in the source code to validate the input data
